@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdaoy.common.corp.ICorpMapper">
+	
+	<resultMap type="cn.xdaoy.common.corp.CorpDo" id="resultCorp">
+		<result column="id" property="id"/>
+		<result column="sysid" property="sysid"/>
+		<result column="corpcode" property="corpcode"/>
+		<result column="corpname" property="corpname"/>
+		<result column="corphost" property="corphost"/>
+		<result column="corpport" property="corpport"/>
+		<result column="corpproc" property="corpproc"/>
+		<result column="corpcharset" property="corpcharset"/>
+		<collection property="corpCodeList" ofType="cn.xdaoy.common.corp.CorpCodeDo">
+			<result column="id" property="corpid"/>
+			<result column="tradecode" property="tradecode"/>
+			<result column="tradecodetext" property="tradecodetext"/>
+			<result column="url" property="url"/>
+			<result column="begintime" property="begintime"/>
+			<result column="endtime" property="endtime"/>
+		</collection>
+	</resultMap>
+	
+
+	<sql id="cols">
+		a.id,
+	  	a.sysid,
+	  	a.corpcode,
+	  	a.corpname,
+	  	a.corphost,
+	  	a.corpport,
+	  	a.corpproc,
+	  	a.corpcharset,
+	  	b.tradecode,
+	  	b.tradecodetext,
+	  	b.url,
+	  	b.begintime,
+	  	b.endtime
+	</sql>
+
+	<sql id="joins">
+		LEFT JOIN pub_conf_corp_code b on a.id=b.corpid and b.enable='1'
+	</sql>
+
+
+	<select id="getByKey" resultMap="resultCorp">
+		select
+		<include refid="cols"></include>
+		from pub_conf_corp a
+		<include refid="joins"></include>
+		<where>
+			a.sysid = #{sysid}
+			AND a.corpcode = #{corpcode}
+		</where>
+	</select>
+	
+	<select id="getFtp" resultType="cn.xdaoy.common.corp.CorpFtpDo">
+		select
+		id,
+		corpid,
+		host,
+		port,
+		username,
+		password,
+		remotepath,
+		localpath,
+		type,
+		proc
+		from pub_conf_corp_ftp a
+		<where>
+			a.corpid = #{corpid}
+			AND a.type = #{type}
+		</where>
+	</select>
+
+</mapper>

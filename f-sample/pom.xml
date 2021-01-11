@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.jgrcb</groupId>
+	<artifactId>f-sample</artifactId>
+	<name>f-sample</name>
+	<version>0.0.1.RELEASE</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<!-- environment setting -->
+		<jdk.version>1.8</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-starter.version>2.2.8.RELEASE</spring-starter.version>
+		<spring-cloud-nacos.version>2.2.1.RELEASE</spring-cloud-nacos.version>
+		<httpclient.version>4.5.12</httpclient.version>
+		<lombok.version>1.18.12</lombok.version>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>cn.xdaoy</groupId>
+			<artifactId>f-service</artifactId>
+			<version>0.0.1.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.xdaoy</groupId>
+			<artifactId>f-m-mq</artifactId>
+			<version>0.0.1.RELEASE</version>
+		</dependency>
+
+		<!-- nacos begin -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+			<version>${spring-cloud-nacos.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<version>${spring-cloud-nacos.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+		<!-- nacos end -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<version>${spring-starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>${spring-starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>wx-java-mp-spring-boot-starter</artifactId>
+			<version>3.9.3.B</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jedis-lock</groupId>
+			<artifactId>jedis-lock</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<outputDirectory>target/app</outputDirectory>
+					<archive>
+						<manifest>
+							<!-- 项目启动类 -->
+							<mainClass>com.jgrcb.sample.Application</mainClass>
+							<!-- 依赖的jar的目录前缀 -->
+							<classpathPrefix>../lib</classpathPrefix>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+					<includes>
+						<!-- 只打包指定目录的文件 -->
+						<include>com/jgrcb/**</include>
+						<include>mapper/**</include>
+						<include>log4j2.xml</include>
+						<include>assembly.xml</include>
+						<include>banner.txt</include>
+					</includes>
+					<!-- 项目启动jar包排除目录 -->
+					<excludes>
+						<exclude>bin/**</exclude>
+						<exclude>config/**</exclude>
+						<exclude>logs/**</exclude>
+						<exclude>web/**</exclude>
+						<exclude>app/**</exclude>
+						<exclude>db/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<outputDirectory>target/app</outputDirectory>
+					<layout>ZIP</layout>
+					<includes>
+						<!-- 项目启动jar包中排除依赖包 -->
+						<include>
+							<groupId>non-exists</groupId>
+							<artifactId>non-exists</artifactId>
+						</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<includeScope>compile</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			<!-- 打包时跳过测试 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<!-- 打包插件 -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/resources/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
