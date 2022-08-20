@@ -1,4 +1,4 @@
-package com.jgrcb.sample.request;
+package cn.xdaoy.sample.request;
 
 import java.io.IOException;
 

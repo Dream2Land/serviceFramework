@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.jgrcb</groupId>
+	<groupId>cn.xdaoy</groupId>
 	<artifactId>f-sample</artifactId>
 	<name>f-sample</name>
 	<version>0.0.1.RELEASE</version>
@@ -97,7 +97,7 @@
 					<archive>
 						<manifest>
 							<!-- 项目启动类 -->
-							<mainClass>com.jgrcb.sample.Application</mainClass>
+							<mainClass>cn.xdaoy.sample.Application</mainClass>
 							<!-- 依赖的jar的目录前缀 -->
 							<classpathPrefix>../lib</classpathPrefix>
 							<addClasspath>true</addClasspath>
@@ -105,7 +105,7 @@
 					</archive>
 					<includes>
 						<!-- 只打包指定目录的文件 -->
-						<include>com/jgrcb/**</include>
+						<include>cn/xdaoy/**</include>
 						<include>mapper/**</include>
 						<include>log4j2.xml</include>
 						<include>assembly.xml</include>
@@ -142,7 +142,7 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>prepare-package</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>

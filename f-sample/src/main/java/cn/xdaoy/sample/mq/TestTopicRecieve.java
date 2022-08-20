@@ -1,4 +1,4 @@
-package com.jgrcb.sample.mq;
+package cn.xdaoy.sample.mq;
 
 import org.springframework.stereotype.Component;
 

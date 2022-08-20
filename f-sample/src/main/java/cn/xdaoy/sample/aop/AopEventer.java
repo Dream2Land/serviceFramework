@@ -1,4 +1,4 @@
-package com.jgrcb.sample.aop;
+package cn.xdaoy.sample.aop;
 
 import org.springframework.stereotype.Component;
 

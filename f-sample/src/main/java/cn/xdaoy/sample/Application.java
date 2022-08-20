@@ -1,4 +1,4 @@
-package com.jgrcb.sample;
+package cn.xdaoy.sample;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -12,8 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import cn.xdaoy.utils.PropertiesUtils;
 
 @SpringBootApplication
-@ComponentScan({"cn.xdaoy","com.jgrcb"})
-@MapperScan({"cn.xdaoy","com.jgrcb"})
+@ComponentScan({"cn.xdaoy","com.ctm"})
+@MapperScan({"cn.xdaoy","com.ctm"})
 @EnableDiscoveryClient
 public class Application {
 

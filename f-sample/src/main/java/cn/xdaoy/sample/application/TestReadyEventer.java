@@ -1,4 +1,4 @@
-package com.jgrcb.sample.application;
+package cn.xdaoy.sample.application;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.stereotype.Component;

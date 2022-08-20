@@ -1,4 +1,4 @@
-package com.jgrcb.sample.mapper;
+package cn.xdaoy.sample.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

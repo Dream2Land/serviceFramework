@@ -1,4 +1,4 @@
-package com.jgrcb.sample.task;
+package cn.xdaoy.sample.task;
 
 import cn.xdaoy.common.task.AbstractTask;
 import cn.xdaoy.common.task.TaskFactory;

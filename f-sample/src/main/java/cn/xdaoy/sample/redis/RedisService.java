@@ -1,4 +1,4 @@
-package com.jgrcb.sample.redis;
+package cn.xdaoy.sample.redis;
 
 import java.util.concurrent.TimeUnit;
 

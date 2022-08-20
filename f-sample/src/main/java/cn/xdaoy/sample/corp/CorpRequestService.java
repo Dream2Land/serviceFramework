@@ -1,4 +1,4 @@
-package com.jgrcb.sample.corp;
+package cn.xdaoy.sample.corp;
 
 import javax.annotation.Resource;
 

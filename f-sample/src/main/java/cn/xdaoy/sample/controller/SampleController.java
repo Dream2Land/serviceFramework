@@ -1,4 +1,4 @@
-package com.jgrcb.sample.controller;
+package cn.xdaoy.sample.controller;
 
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.jgrcb.sample.aop.AopTarget;
-import com.jgrcb.sample.corp.CorpRequestService;
-import com.jgrcb.sample.mapper.SampleMapper;
-import com.jgrcb.sample.mq.MQSend;
-import com.jgrcb.sample.redis.RedisService;
-import com.jgrcb.sample.request.RequestTest;
+import cn.xdaoy.sample.aop.AopTarget;
+import cn.xdaoy.sample.corp.CorpRequestService;
+import cn.xdaoy.sample.mapper.SampleMapper;
+import cn.xdaoy.sample.mq.MQSend;
+import cn.xdaoy.sample.redis.RedisService;
+import cn.xdaoy.sample.request.RequestTest;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
