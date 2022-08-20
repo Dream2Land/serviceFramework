@@ -9,7 +9,6 @@
 	<artifactId>f-service</artifactId>
 	<name>f-service</name>
 	<version>0.0.1.RELEASE</version>
-	<packaging>jar</packaging>
 
 	<properties>
 		<!-- environment setting -->

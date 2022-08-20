@@ -2,6 +2,7 @@ package cn.xdaoy.test;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -50,7 +51,7 @@ public class MyTest extends HttpUtils{
 		Request request = new Request.Builder().addHeader("source","0001")
 				.addHeader("target", "iboc-info")
 				.addHeader("sign", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwMDAxIiwic3ViIjoie1widmlwX2x2bFwiOlwiU1ZJUDJcIixcInVzZXJsZXZlbFwiOlwiMDJcIixcIm9wZW5JZFwiOlwib2ZDNVA1UzRIN0hNa1JpVHA2WW1mdU1kQjVSUVwiLFwib3BlcmF0ZXJJZFwiOlwiMDM5OTMyODU5YzEwNDYxODgzOWZiNDBmNzVjNmJmOTNcIixcInVzZXJpZFwiOlwiMDM5OTMyODU5YzEwNDYxODgzOWZiNDBmNzVjNmJmOTNcIixcInRhZ3NcIjpbXCIyXCIsXCIzXCJdfSIsImlzcyI6ImdhdGV3YXkiLCJpYXQiOjE1OTQ3Nzk2NTQsImV4cCI6MTU5NDc4MzI1NH0.M0CyvUH5e1VDJyRk-HTr1tGxmXWrdZ2TqBdVubO41WU")
-				.url("https://ibobt.jgrcb.com/gateway/v/api/iboc/info/sms/send")
+				.url("https://xdaoy.cn/gateway/v/api/iboc/info/sms/send")
 				.post(body).build();
 		Response response = client.newCall(request).execute();
 		System.out.println(Base64.decodeBase64(response.body().string().getBytes()));
@@ -70,21 +71,13 @@ public class MyTest extends HttpUtils{
         return cb.array();
     }
 	
-	public static void test3() {
+	public static void test3() throws Exception {
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		for(int i=0;i<15;i++) {
-		TaskFactory.addAsyncTask(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					HttpGet get = new HttpGet();
-					get.setURI(new URI("https://www.xdaoy.cn"));
-					CloseableHttpResponse resp = client.execute(get);
-					System.out.println(resp.getStatusLine().getStatusCode());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}});
+			HttpGet get = new HttpGet();
+			get.setURI(new URI("https://www.xdaoy.cn"));
+			CloseableHttpResponse resp = client.execute(get);
+			System.out.println(resp.getStatusLine().getStatusCode());
 		}
 	}
 	

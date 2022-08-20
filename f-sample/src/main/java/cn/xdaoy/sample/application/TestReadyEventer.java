@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TestReadyEventer implements ReadyEventer{
 
-	@Override
 	public void exec(ApplicationReadyEvent event) {
 		log.info("\\n\\n\\n\\ntest application ready\\n\\n\\n\\n");
 	}

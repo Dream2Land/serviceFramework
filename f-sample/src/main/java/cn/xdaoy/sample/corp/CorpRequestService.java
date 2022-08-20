@@ -18,7 +18,7 @@ public class CorpRequestService {
 	CorpRequest corpRequest;
 	
 	public void testReqest() {
-		CorpDo corp = query.getConfig(new CorpDo("ibob-zx","lszx"));
+		CorpDo corp = query.getConfig(new CorpDo("appid","corpid"));
 		try {
 			corpRequest.corpPostJson(corp, "01","{}");
 		} catch (Exception e) {
